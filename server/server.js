@@ -1,14 +1,19 @@
-const { createServer } = require('node:http');
+import express from 'express';
+import axios from 'axios';
+import dotenv from 'dotenv';
 
-const hostname = '127.0.0.1';
-const port = 3000;
+dotenv.config();
 
-const server = createServer((req, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end('Hello World');
+const hostname = process.env.HOSTNAME;
+const port = process.env.PORT;
+
+const app = express();
+
+app.get('/', (req, res) => {
+  res.send('Hello, World!');
 });
 
-server.listen(port, hostname, () => {
+// Start the server on port 3000
+app.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`);
 });
